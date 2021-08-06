@@ -9,18 +9,29 @@
 import SwiftUI
 
 struct ItemViewerView: View {
+    var slug:String
+    
+    init(slug:String) {
+        self.slug = slug
+    }
+   @ObservedObject var itemPreviewVM = ItemPreviewVM()
    @State var isDrag:Bool = false
    @ViewBuilder var body: some View {
         ZStack(alignment:.bottom){
             Color.black
             VStack {
-                RemoteImage(url: "https://media.rawg.io/media/screenshots/999/9996d2692128d717880d2be9f9351765.jpg")
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: UIScreen.width, height: UIScreen.height*0.4, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                //MARK: Problem, gimana caranya yah?
+                if itemPreviewVM.result.image! == ""{
+                    ProgressView()
+                } else {
+                    RemoteImage(url: itemPreviewVM.result.image ?? "ini link klo ga jalan")
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: UIScreen.width, height: UIScreen.height*0.4, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                }
                 Spacer()
             }
             //MARK: Scroll View Content
-            ScrollViewContent(isDrag: $isDrag)
+            ScrollViewContent(isDrag: $isDrag, itemPreviewVM: itemPreviewVM)
             //MARK: Navbar
             Rectangle()
                 .fill(Color.white.opacity(isDrag ? 1:0))
@@ -28,19 +39,25 @@ struct ItemViewerView: View {
                 .shadow(color: .black.opacity(0.1), radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
                 .offset(y:-UIScreen.height*0.90)
                 .animation(.easeInOut)
-            NavbarItemViewer(isDrag: $isDrag)
-        }.ignoresSafeArea(edges: .top)
+            NavbarItemViewer(itemPreviewVM: self.itemPreviewVM, isDrag: $isDrag)
+        }
+        .ignoresSafeArea(edges: .top)
+        .onAppear{
+            itemPreviewVM.fetchData(slug: slug)
+        }
     }
 }
 
+/*
 struct ItemViewerView_Previews: PreviewProvider {
     static var previews: some View {
         ItemViewerView()
     }
 }
-
+*/
 struct NavbarItemViewer: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @ObservedObject var itemPreviewVM:ItemPreviewVM
     @Binding var isDrag:Bool
     @ViewBuilder var body: some View {
         VStack{
@@ -60,8 +77,12 @@ struct NavbarItemViewer: View {
                                 .shadow(color:.black.opacity(isDrag ? 0:0.2),radius: 2)
                         )
                 }
+                /*Debug Button
+                Button("makan"){
+                    print("image : \(itemPreviewVM.result.image!)")
+                }*/
                 Spacer()
-                Text("Rumah Makan Ampera")
+                Text(itemPreviewVM.result.name ?? "nil")
                     .font(.system(.title3, design: .rounded))
                     .fontWeight(.bold)
                     .opacity(isDrag ? 1:0)
@@ -91,52 +112,57 @@ struct ViewOffsetKey: PreferenceKey {
 struct ScrollViewContent: View {
     @State private var location: CGFloat = CGFloat.zero
     @Binding var isDrag:Bool
-    @ObservedObject var itemPreviewVM = ItemPreviewVM()
+    @ObservedObject var itemPreviewVM:ItemPreviewVM
     
     @ViewBuilder  var body: some View {
         ScrollView{
             VStack(alignment:.leading){
                 HStack {
                     VStack(alignment:.leading){
-                        Text("Rumah Makan Ampera")
+                        Text(itemPreviewVM.result.name ?? "nil")
                             .font(.system(.title3, design: .rounded))
                             .fontWeight(.bold)
                             .padding(.top,20)
                             .padding(.horizontal)
-                        Text("Valve Software")
-                            .font(.caption)
-                            .fontWeight(.light)
-                            .padding(.horizontal)
+                        ScrollView(.horizontal, showsIndicators: false){
+                        HStack {
+                            ForEach(itemPreviewVM.devs){val in
+                                Text("\(val.name ?? "")," )
+                                    .font(.caption)
+                                    .fontWeight(.light)
+                            }
+                        }.padding(.horizontal)
+                    }
+                        .padding(.bottom)
                     }
                     Spacer()
-                    Image("teen")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .padding()
                 }
                 HStack{
-                    ForEach(0..<5){_ in
+                    ForEach(0..<Int(itemPreviewVM.result.rating ?? 1)){_ in
                         Image(systemName: "star.fill")
                             .foregroundColor(.yellow)
                     }
                 }.padding(.horizontal)
-                HStack{
-                    Text("Shooter")
-                        .foregroundColor(.white)
-                        .font(.footnote)
-                        .fontWeight(.regular)
-                        .padding(5)
-                        .padding(.horizontal,10)
-                        .background(Color.black)
-                        .cornerRadius(99)
+                
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack{
+                        ForEach(itemPreviewVM.genres) {val in
+                            Text(val.name ?? "nil")
+                                .foregroundColor(.white)
+                                .font(.footnote)
+                                .fontWeight(.regular)
+                                .padding(5)
+                                .padding(.horizontal,10)
+                                .background(Color.black)
+                                .cornerRadius(99)
+                        }
+                    }.padding(.horizontal)
                 }
-                .padding(.horizontal)
                 Text("Description")
                     .font(.title3)
                     .fontWeight(.medium)
                     .padding(.horizontal)
-                Text(itemPreviewVM.desc)
+                Text(itemPreviewVM.result.desc ?? "nil")
                     .font(.caption)
                     .fontWeight(.regular)
                     .foregroundColor(.gray)

@@ -33,11 +33,7 @@ struct HomeView: View {
                             .padding(.top)
                         VStack(alignment:.leading) {
                             Text("maka")
-                            HStack{
-                                RoundedRectangle(cornerRadius: 10)
-                                    .frame(width: 120, height: 120, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                Spacer()
-                            }
+                            SearchListItem(name: "lorem", released: "2020", link: "", rating: 0, rank: 0)
                         }
                         .padding()
                         .background(Color.white)
@@ -118,7 +114,8 @@ struct TierListContent: View {
             ScrollView(.horizontal, showsIndicators:false ){
                 HStack{
                     NavigationLink(
-                        destination: ItemViewerView()
+                        //MARK: Navigate to Item Viewer
+                        destination: Text("Makan bang")
                             .navigationTitle("Makan bang")
                             .navigationBarHidden(true),
                         label: {

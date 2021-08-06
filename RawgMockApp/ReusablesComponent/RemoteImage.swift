@@ -24,16 +24,18 @@ struct RemoteImage:View {
         }
         
         func fetchImage(_ url:String){
+            //print("ini url, kenapa ga jalan ? :\(url)")
             guard let url = URL(string: url) else {
                 self.state = .failure
-                print("\(url) is invalid")
+                print("\(url) is invalid lah brow, kenapa yak???")
                 return
             }
             let session = URLSession.shared
             let request = session.dataTask(with: url){(data,_,error) in
                 if let error = error{
                     self.state = .failure
-                    print(error)
+                    print("url : \(url)")
+                    print("error bgtszzz : \(error)")
                     return
                 }
                 if let data = data, data.count > 0 {
@@ -42,7 +44,8 @@ struct RemoteImage:View {
                 } else {
                     self.state = .failure
                 }
-                
+                //MARK: YOU NEED TO LOAD THE DATA FIRST BEFORE LOADING THE GOD DAMN SHIT, but god knows how
+                // my codes are pure shit :)
                 DispatchQueue.main.async {
                     self.objectWillChange.send()
                 }

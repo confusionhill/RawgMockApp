@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/*
 struct SearchListView:View{
     
     @ObservedObject var searchVM:SearchVM
@@ -23,14 +24,13 @@ struct SearchListView:View{
                     .navigationBarHidden(true),
                 label: {
                     SearchListItem(name: "", released: "", link: "", rating: 0, rank: 0)
-                    //SearchListItem(name: "", released: "", link: "", rating: 0, rank: 0)
                 })
         case .failure :
             Text("Failed")
         }
     }
 }
-
+*/
 
 struct SearchListItem:View {
     
@@ -54,20 +54,20 @@ struct SearchListItem:View {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: 120, height: 120, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                RemoteImage(url: "https://media.rawg.io/media/screenshots/999/9996d2692128d717880d2be9f9351765.jpg")
+                RemoteImage(url: self.link)
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 120, height: 120, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .cornerRadius(10)
             }
             VStack(alignment:.leading) {
-                Text("Name")
+                Text(self.name)
                     .font(.title2)
                     .fontWeight(.semibold)
-                Text("2013-09-17")
+                Text(self.released)
                     .font(.subheadline)
                     .fontWeight(.light)
-                Text("Popularity      : \(5)")
-                Text("Rating             : \(4.59)")
+                Text("Popularity      : \(self.rank)")
+                Text("Rating             : \(self.rating)")
             }
             Spacer()
         }
