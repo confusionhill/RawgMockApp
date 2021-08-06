@@ -26,14 +26,14 @@ struct RemoteImage:View {
         func fetchImage(_ url:String){
             guard let url = URL(string: url) else {
                 self.state = .failure
-                print("Invalid URL: \(url)")
+                print("\(url) is invalid")
                 return
             }
             let session = URLSession.shared
             let request = session.dataTask(with: url){(data,_,error) in
                 if let error = error{
                     self.state = .failure
-                    print(error.localizedDescription)
+                    print(error)
                     return
                 }
                 if let data = data, data.count > 0 {

@@ -20,6 +20,14 @@
 		FF44F57226BAFD43005B07B4 /* ItemViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44F57126BAFD43005B07B4 /* ItemViewerView.swift */; };
 		FF44F57526BBA051005B07B4 /* ItemPreviewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44F57426BBA051005B07B4 /* ItemPreviewVM.swift */; };
 		FF53C64226BC067500BD6FFC /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C64126BC067500BD6FFC /* SearchView.swift */; };
+		FF53C64526BC12FF00BD6FFC /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C64426BC12FF00BD6FFC /* HomeVM.swift */; };
+		FF53C64926BC18F600BD6FFC /* TabViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C64826BC18F600BD6FFC /* TabViewEnum.swift */; };
+		FF53C64B26BC1B2000BD6FFC /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C64A26BC1B2000BD6FFC /* TabViewController.swift */; };
+		FF53C64F26BC35EA00BD6FFC /* States.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C64E26BC35EA00BD6FFC /* States.swift */; };
+		FF53C65226BC368F00BD6FFC /* SearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C65126BC368F00BD6FFC /* SearchVM.swift */; };
+		FF53C65426BC36D600BD6FFC /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C65326BC36D600BD6FFC /* SearchListView.swift */; };
+		FF53C65626BC384900BD6FFC /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C65526BC384900BD6FFC /* Api.swift */; };
+		FF53C65826BCEAF700BD6FFC /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C65726BCEAF700BD6FFC /* AccountView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +46,14 @@
 		FF44F57126BAFD43005B07B4 /* ItemViewerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewerView.swift; sourceTree = "<group>"; };
 		FF44F57426BBA051005B07B4 /* ItemPreviewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPreviewVM.swift; sourceTree = "<group>"; };
 		FF53C64126BC067500BD6FFC /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		FF53C64426BC12FF00BD6FFC /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
+		FF53C64826BC18F600BD6FFC /* TabViewEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewEnum.swift; sourceTree = "<group>"; };
+		FF53C64A26BC1B2000BD6FFC /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		FF53C64E26BC35EA00BD6FFC /* States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = States.swift; sourceTree = "<group>"; };
+		FF53C65126BC368F00BD6FFC /* SearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVM.swift; sourceTree = "<group>"; };
+		FF53C65326BC36D600BD6FFC /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
+		FF53C65526BC384900BD6FFC /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		FF53C65726BCEAF700BD6FFC /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +86,7 @@
 		FF44F54926BAEE7E005B07B4 /* RawgMockApp */ = {
 			isa = PBXGroup;
 			children = (
+				FF53C64626BC18D900BD6FFC /* Controller */,
 				FF44F56926BAEEFD005B07B4 /* API */,
 				FF44F56826BAEEE7005B07B4 /* Delegates */,
 				FF44F54E26BAEE7E005B07B4 /* ContentView.swift */,
@@ -116,6 +133,7 @@
 		FF44F56326BAEEC0005B07B4 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				FF53C65726BCEAF700BD6FFC /* AccountView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -124,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				FF53C64126BC067500BD6FFC /* SearchView.swift */,
+				FF53C65326BC36D600BD6FFC /* SearchListView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -146,6 +165,8 @@
 		FF44F56726BAEEDC005B07B4 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				FF53C65026BC366B00BD6FFC /* SearchVM */,
+				FF53C64326BC12EA00BD6FFC /* Home */,
 				FF44F57326BBA03E005B07B4 /* ItemPreview */,
 			);
 			path = ViewModel;
@@ -163,6 +184,7 @@
 		FF44F56926BAEEFD005B07B4 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				FF53C65526BC384900BD6FFC /* Api.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -172,6 +194,7 @@
 			children = (
 				FF44F56D26BAEFD2005B07B4 /* Extentions.swift */,
 				FF44F56F26BAF041005B07B4 /* RemoteImage.swift */,
+				FF53C64E26BC35EA00BD6FFC /* States.swift */,
 			);
 			path = ReusablesComponent;
 			sourceTree = "<group>";
@@ -182,6 +205,39 @@
 				FF44F57426BBA051005B07B4 /* ItemPreviewVM.swift */,
 			);
 			path = ItemPreview;
+			sourceTree = "<group>";
+		};
+		FF53C64326BC12EA00BD6FFC /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FF53C64426BC12FF00BD6FFC /* HomeVM.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		FF53C64626BC18D900BD6FFC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FF53C64726BC18E100BD6FFC /* TabViewController */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FF53C64726BC18E100BD6FFC /* TabViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FF53C64826BC18F600BD6FFC /* TabViewEnum.swift */,
+				FF53C64A26BC1B2000BD6FFC /* TabViewController.swift */,
+			);
+			path = TabViewController;
+			sourceTree = "<group>";
+		};
+		FF53C65026BC366B00BD6FFC /* SearchVM */ = {
+			isa = PBXGroup;
+			children = (
+				FF53C65126BC368F00BD6FFC /* SearchVM.swift */,
+			);
+			path = SearchVM;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,13 +310,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF53C64F26BC35EA00BD6FFC /* States.swift in Sources */,
 				FF53C64226BC067500BD6FFC /* SearchView.swift in Sources */,
+				FF53C64526BC12FF00BD6FFC /* HomeVM.swift in Sources */,
 				FF44F55226BAEE7E005B07B4 /* RawgMockApp.xcdatamodeld in Sources */,
+				FF53C64926BC18F600BD6FFC /* TabViewEnum.swift in Sources */,
+				FF53C65626BC384900BD6FFC /* Api.swift in Sources */,
+				FF53C65826BCEAF700BD6FFC /* AccountView.swift in Sources */,
+				FF53C64B26BC1B2000BD6FFC /* TabViewController.swift in Sources */,
+				FF53C65226BC368F00BD6FFC /* SearchVM.swift in Sources */,
 				FF44F54B26BAEE7E005B07B4 /* AppDelegate.swift in Sources */,
 				FF44F57026BAF041005B07B4 /* RemoteImage.swift in Sources */,
 				FF44F57226BAFD43005B07B4 /* ItemViewerView.swift in Sources */,
 				FF44F56E26BAEFD2005B07B4 /* Extentions.swift in Sources */,
 				FF44F57526BBA051005B07B4 /* ItemPreviewVM.swift in Sources */,
+				FF53C65426BC36D600BD6FFC /* SearchListView.swift in Sources */,
 				FF44F54D26BAEE7E005B07B4 /* SceneDelegate.swift in Sources */,
 				FF44F56B26BAEF35005B07B4 /* HomeView.swift in Sources */,
 				FF44F54F26BAEE7E005B07B4 /* ContentView.swift in Sources */,

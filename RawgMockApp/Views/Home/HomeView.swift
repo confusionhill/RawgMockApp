@@ -14,29 +14,46 @@ struct HomeView: View {
         ZStack {
             Color.black.opacity(0.05).ignoresSafeArea()
             //MARK: TOP THING LA
-            Rectangle()
-                .ignoresSafeArea(edges:.top)
-                .frame(width: UIScreen.width, height: UIScreen.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .position(x: UIScreen.width/2, y:-UIScreen.height*0.2)
             ScrollView {
-                VStack(spacing:0){
-                    //MARK: Top Content
+                ZStack {
                     Rectangle()
-                        .frame(width: UIScreen.width, height: UIScreen.height*0.20)
-                        .overlay(
-                            TopContentView(isSearch: $isSearch)
-                        )
-                    //MARK: TOP RANKS
-                    TierListContent()
-                    TierListContent()
+                        .ignoresSafeArea(edges:.top)
+                        .frame(width: UIScreen.width, height: UIScreen.height, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .position(x: UIScreen.width/2, y:-UIScreen.height*0.2)
+                    VStack(spacing:0){
+                        //MARK: Top Content
+                        Rectangle()
+                            .frame(width: UIScreen.width, height: UIScreen.height*0.20)
+                            .overlay(
+                                TopContentView(isSearch: $isSearch)
+                            )
+                        //MARK: TOP RANKS
+                        TierListContent()
+                        TierListContent()
+                            .padding(.top)
+                        VStack(alignment:.leading) {
+                            Text("maka")
+                            HStack{
+                                RoundedRectangle(cornerRadius: 10)
+                                    .frame(width: 120, height: 120, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                Spacer()
+                            }
+                        }
+                        .padding()
+                        .background(Color.white)
                         .padding(.top)
-                    //TierListContent()
-                    Spacer()
+                        Spacer()
+                    }
                 }
             }
+           // .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.blue/*@END_MENU_TOKEN@*/)
         }
         .fullScreenCover(isPresented: $isSearch, content: {
-            SearchView()
+            NavigationView {
+                SearchView()
+                    .navigationTitle("Search")
+                    .navigationBarHidden(true)
+            }
         })
     }
 }
@@ -86,6 +103,7 @@ struct TopContentView: View {
 }
 
 struct TierListContent: View {
+    @ObservedObject var homeVM = HomeVM()
     @ViewBuilder
     var body: some View {
         VStack(alignment:.leading){
@@ -104,9 +122,17 @@ struct TierListContent: View {
                             .navigationTitle("Makan bang")
                             .navigationBarHidden(true),
                         label: {
-                            RoundedRectangle(cornerRadius: 20)
-                                .frame(width: 220, height: 170, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                .padding(.leading)
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color.black)
+                                    .frame(width: 220, height: 170, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                    .padding(.leading)
+                                RemoteImage(url: homeVM.link)
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 220, height: 170, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                    .cornerRadius(20)
+                                    .padding(.leading)
+                            }
                         })
                     ForEach(0..<5){_ in
                         RoundedRectangle(cornerRadius: 20)
