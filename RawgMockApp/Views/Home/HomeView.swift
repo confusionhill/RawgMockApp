@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject var homeVM = HomeVM()
     @State var isSearch:Bool = false
     @ViewBuilder
     var body: some View {
@@ -28,12 +29,30 @@ struct HomeView: View {
                                 TopContentView(isSearch: $isSearch)
                             )
                         //MARK: TOP RANKS
-                        TierListContent()
-                        TierListContent()
-                            .padding(.top)
+                        TierListContent(homeVM: homeVM)
+                        //TierListContent(homeVM: homeVM)
                         VStack(alignment:.leading) {
-                            Text("maka")
-                            SearchListItem(name: "lorem", released: "2020", link: "", rating: 0, rank: 0)
+                            Text("Today's Menu")
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                            if homeVM.state == .loading {
+                                HStack{
+                                    ProgressView()
+                                }
+                                Divider()
+                            }
+                            //Viewer
+                            ForEach(homeVM.regularPick) { val in
+                                NavigationLink(
+                                    destination: ItemViewerView(slug: val.slug)
+                                        .navigationTitle("Title")
+                                        .navigationBarHidden(true),
+                                    label: {
+                                        SearchListItem(name: val.name ?? "nil", released: val.released ?? "nil", link: val.image ?? "", rating: val.rating ?? 0, rank: val.rank ?? 0)
+                                            .foregroundColor(.black)
+                                    })
+                                Divider()
+                            }
                         }
                         .padding()
                         .background(Color.white)
@@ -43,6 +62,9 @@ struct HomeView: View {
                 }
             }
            // .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.blue/*@END_MENU_TOKEN@*/)
+        }
+        .onAppear{
+            homeVM.fetchData()
         }
         .fullScreenCover(isPresented: $isSearch, content: {
             NavigationView {
@@ -99,7 +121,7 @@ struct TopContentView: View {
 }
 
 struct TierListContent: View {
-    @ObservedObject var homeVM = HomeVM()
+    @ObservedObject var homeVM:HomeVM
     @ViewBuilder
     var body: some View {
         VStack(alignment:.leading){
@@ -113,28 +135,34 @@ struct TierListContent: View {
             .padding(.horizontal)
             ScrollView(.horizontal, showsIndicators:false ){
                 HStack{
-                    NavigationLink(
-                        //MARK: Navigate to Item Viewer
-                        destination: Text("Makan bang")
-                            .navigationTitle("Makan bang")
-                            .navigationBarHidden(true),
-                        label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color.black)
-                                    .frame(width: 220, height: 170, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                    .padding(.leading)
-                                RemoteImage(url: homeVM.link)
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 220, height: 170, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                    .cornerRadius(20)
-                                    .padding(.leading)
-                            }
-                        })
-                    ForEach(0..<5){_ in
-                        RoundedRectangle(cornerRadius: 20)
-                            .frame(width: 220, height: 170, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    if homeVM.state == .loading{
+                        ForEach(0..<5){_ in
+                            RoundedRectangle(cornerRadius: 20)
+                                .frame(width: 220, height: 170, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        }
+                    } else {
+                        ForEach(homeVM.topPick[0..<5]) {val in
+                            NavigationLink(
+                                //MARK: Navigate to Item Viewer
+                                destination: ItemViewerView(slug: val.slug ?? "nil")
+                                    .navigationTitle("Makan bang")
+                                    .navigationBarHidden(true),
+                                label: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .fill(Color.black)
+                                            .frame(width: 220, height: 170, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                            .padding(.leading)
+                                        RemoteImage(url: val.image ?? "nil")
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 220, height: 170, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                            .cornerRadius(20)
+                                            .padding(.leading)
+                                    }
+                                })
+                        }
                     }
+                    
                 }
             }
             .padding(.bottom)
@@ -142,3 +170,6 @@ struct TierListContent: View {
         .background(Color.white)
     }
 }
+
+/*
+ */

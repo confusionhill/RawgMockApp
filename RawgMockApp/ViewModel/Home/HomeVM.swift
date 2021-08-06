@@ -16,8 +16,12 @@ public class HomeVM:ObservableObject {
     private var api = Api()
     private let myKey = ApiKey()
     
+    let dispatchGroup = DispatchGroup() // pengen make, cuma masih bingung hehehe, biarin dulu aja, buat nanti abis course kelar
+    
     @Published public var link:String = "https://media.rawg.io/media/screenshots/999/9996d2692128d717880d2be9f9351765.jpg"
-    @Published public var topPick = ""
+    @Published  var topPick = [TopAndNew]()
+    @Published  var newPick = [TopAndNew]()
+    @Published var regularPick = [BasicHome]()
     @Published var state:DownloadState = .loading
 }
 
@@ -34,11 +38,11 @@ extension HomeVM {
         let tipe:String = {
             switch type{
             case .name:
-                return "-name"
+                return "name"
             case .added:
                 return "added"
             case .rating:
-                return "rating"
+                return "-rating"
             }
         }()
         self.api.link!.queryItems = [
@@ -51,24 +55,39 @@ extension HomeVM {
     public func fetchData() {
         print("Downloading data....")
         getTopPicks()
-        getNewest()
+       // getNewest()
         getByName()
+        dispatchGroup.notify(queue: .main){
+            self.state = .success
+            print("Loading data success..")
+        }
     }
 }
 
 //MARK: Fetching Top picks
 extension HomeVM {
     private func getTopPicks(){
+        dispatchGroup.enter()
         let myurl = getAPI(type: .rating).url!
         let request = URLRequest(url: myurl )
-        let task = URLSession.shared.dataTask(with: request) {(data,response,error) in
+        let task = URLSession.shared.dataTask(with: request) { (data,response,error) in
             guard let response = response as? HTTPURLResponse else { return }
             guard response.statusCode == 200 else {
                 print("Http Status: \(response.statusCode) link: \(myurl)")
                 return
             }
             //Assign Data
-            self.assignData(data: data, error: error)
+            if let data = data {
+                do{
+                    let hasil = try JSONDecoder().decode(HomeModelTopAndNew.self, from: data)
+                    self.run {
+                        self.topPick = hasil.results
+                        self.dispatchGroup.leave()
+                    }
+                } catch{
+                    print(error.localizedDescription)
+                }
+            }
         }
         task.resume()
     }
@@ -77,27 +96,56 @@ extension HomeVM {
 //MARK: Fetching Newest picks
 extension HomeVM {
     private func getNewest(){
-       // let request = URLRequest(url: getAPI(type: .added).url!)
+        let myurl = getAPI(type: .added).url!
+        let request = URLRequest(url: myurl )
+        let task = URLSession.shared.dataTask(with: request) { (data,response,error) in
+            guard let response = response as? HTTPURLResponse else { return }
+            guard response.statusCode == 200 else {
+                print("Http Status: \(response.statusCode) link: \(myurl)")
+                return
+            }
+            //Assign Data
+            if let data = data {
+                do{
+                    let hasil = try JSONDecoder().decode(HomeModelTopAndNew.self, from: data)
+                    self.run {
+                        self.topPick = hasil.results
+                    }
+                } catch{
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        task.resume()
     }
 }
 
 //MARK: Fetching data by name from A-Z
 extension HomeVM {
     private func getByName(){
-       // let request = URLRequest(url: getAPI(type: .name).url!)
-    }
-}
-
-
-//Assign Data
-extension HomeVM {
-    private func assignData(data:Data?,error:Error?){
-        if let data = data {
-            do {
-                //Queueu
-            } catch {
-                print(error.localizedDescription)
+        dispatchGroup.enter()
+        let myurl = getAPI(type: .name).url!
+        let request = URLRequest(url: myurl )
+        let task = URLSession.shared.dataTask(with: request) { (data,response,error) in
+            guard let response = response as? HTTPURLResponse else { return }
+            guard response.statusCode == 200 else {
+                print("Http Status: \(response.statusCode) link: \(myurl)")
+                return
+            }
+            if let data = data {
+                do{
+                    let hasil = try JSONDecoder().decode(HomeModelBasic.self, from: data)
+                    self.run {
+                        self.regularPick = hasil.results
+                        self.dispatchGroup.leave()
+                    }
+                } catch{
+                    print(error.localizedDescription)
+                }
             }
         }
+        task.resume()
     }
 }
+
+

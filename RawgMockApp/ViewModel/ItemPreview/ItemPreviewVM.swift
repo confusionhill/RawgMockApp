@@ -8,13 +8,43 @@
 import Foundation
 
 public class ItemPreviewVM:ObservableObject {
-   @Published public var desc:String = """
-        Portal 2 is a first-person puzzle game developed by Valve Corporation and released on April 19, 2011 on Steam, PS3 and Xbox 360. It was published by Valve Corporation in digital form and by Electronic Arts in physical form.
-        Its plot directly follows the first game's, taking place in the Half-Life universe. You play as Chell, a test subject in a research facility formerly ran by the company Aperture Science, but taken over by an evil AI that turned upon its creators, GladOS. After defeating GladOS at the end of the first game but failing to escape the facility, Chell is woken up from a stasis chamber by an AI personality core, Wheatley, as the unkempt complex is falling apart. As the two attempt to navigate through the ruins and escape, they stumble upon GladOS, and accidentally re-activate her...
-
-        Portal 2's core mechanics are very similar to the first game's ; the player must make their way through several test chambers which involve puzzles. For this purpose, they possess a Portal Gun, a weapon capable of creating teleportation portals on white surfaces. This seemingly simple mechanic and its subtleties coupled with the many different puzzle elements that can appear in puzzles allows the game to be easy to start playing, yet still feature profound gameplay. The sequel adds several new puzzle elements, such as gel that can render surfaces bouncy or allow you to accelerate when running on them.
-
-        The game is often praised for its gameplay, its memorable dialogue and writing and its aesthetic. Both games in the series are responsible for inspiring most puzzle games succeeding them, particularly first-person puzzle games. The series, its characters and even its items such as the portal gun and the companion cube have become a cultural icon within gaming communities.
-        """
-    @Published public var image:String = "https://media.rawg.io/media/screenshots/999/9996d2692128d717880d2be9f9351765.jpg"
+    @Published var result = ItemPreviewModel(name: "none", image: "", desc: "none", rating: 0, developers:[developer](),genres: [genre]())
+    @Published var devs:[developer] = []
+    @Published var genres:[genre] = []
+    private var api = Api()
+    private let myKey = ApiKey()
+    
+    private func getAPI(_ slug:String) -> URLComponents {
+        self.api.link!.path = "/api/games/\(slug)"
+        self.api.link!.queryItems = [
+            URLQueryItem(name: "key", value: myKey.key),
+        ]
+        return api.link!
+    }
+    
+    public func fetchData(slug:String) {
+        let request = URLRequest(url: getAPI(slug).url!)
+        let task = URLSession.shared.dataTask(with: request) {(data,response,error) in
+            guard let response = response as? HTTPURLResponse else { return }
+            guard response.statusCode == 200 else { return }
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            if let data = data {
+                do {
+                    let hasil = try JSONDecoder().decode(ItemPreviewModel.self, from: data)
+                    DispatchQueue.main.async {
+                        self.devs = hasil.developers ?? []
+                        self.genres = hasil.genres ?? []
+                        self.result = hasil
+                        //print(self.result)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        task.resume()
+    }
 }

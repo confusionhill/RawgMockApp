@@ -120,6 +120,7 @@
 		FF44F56126BAEEB3005B07B4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FF79234F26BD966900A05AD4 /* LaunchScreen */,
 				FF44F56526BAEECC005B07B4 /* ItemPreview */,
 				FF44F56426BAEEC6005B07B4 /* Search */,
 				FF44F56326BAEEC0005B07B4 /* Account */,
@@ -271,6 +272,13 @@
 				FF79234D26BD8B4E00A05AD4 /* HomeModel.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		FF79234F26BD966900A05AD4 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LaunchScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
