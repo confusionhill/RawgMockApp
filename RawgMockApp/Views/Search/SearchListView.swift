@@ -37,10 +37,10 @@ struct SearchListItem:View {
     var name:String
     var released:String
     var link:String
-    var rating:Float
+    var rating:Double
     var rank:Int
     
-    init(name:String,released:String,link:String,rating:Float,rank:Int) {
+    init(name:String,released:String,link:String,rating:Double,rank:Int) {
         self.name = name
         self.released = released
         self.link = link
@@ -67,7 +67,7 @@ struct SearchListItem:View {
                     .font(.subheadline)
                     .fontWeight(.light)
                 Text("Popularity      : \(self.rank)")
-                Text("Rating             : \(self.rating)")
+                Text("Rating             : \(String(format: "%.2f", self.rating))") //
             }
             Spacer()
         }

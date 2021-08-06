@@ -33,8 +33,7 @@ struct HomeView: View {
                         //TierListContent(homeVM: homeVM)
                         VStack(alignment:.leading) {
                             Text("Today's Menu")
-                                .font(.title3)
-                                .fontWeight(.semibold)
+                                .font(.headline)
                             if homeVM.state == .loading {
                                 HStack{
                                     ProgressView()
@@ -128,7 +127,7 @@ struct TierListContent: View {
             HStack {
                 Text("Top Picks")
                     .font(.headline)
-                Image(systemName: "arrow.right")
+                //Image(systemName: "arrow.right")
                 Spacer()
             }
             .padding(.top)
@@ -140,6 +139,7 @@ struct TierListContent: View {
                             RoundedRectangle(cornerRadius: 20)
                                 .frame(width: 220, height: 170, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         }
+                        .padding(.leading)
                     } else {
                         ForEach(homeVM.topPick[0..<5]) {val in
                             NavigationLink(

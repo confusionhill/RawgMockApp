@@ -14,6 +14,11 @@ struct ContentView: View {
                 HomeView()
                     .navigationTitle("Home")
                     .navigationBarHidden(true)
+                    .tabItem { Label("Home", systemImage: "house") }
+                AccountView()
+                    .navigationTitle("Account")
+                    .navigationBarHidden(true)
+                    .tabItem { Label("About", systemImage: "person.circle") }
             }
         }
     }

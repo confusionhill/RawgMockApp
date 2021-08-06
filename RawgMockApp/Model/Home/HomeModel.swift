@@ -36,7 +36,7 @@ struct BasicHome:Codable,Identifiable {
     var name:String?
     var released:String?
     var image:String?
-    var rating:Float?
+    var rating:Double?
     var rank:Int?
     
     enum CodingKeys: String, CodingKey {

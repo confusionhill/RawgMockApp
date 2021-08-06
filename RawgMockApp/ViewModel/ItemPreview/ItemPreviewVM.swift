@@ -8,7 +8,7 @@
 import Foundation
 
 public class ItemPreviewVM:ObservableObject {
-    @Published var result = ItemPreviewModel(name: "none", image: "", desc: "none", rating: 0, developers:[developer](),genres: [genre]())
+    @Published var result = ItemPreviewModel(name: "none", image: "", desc: "none", rating: -1, developers:[developer](),genres: [genre]())
     @Published var devs:[developer] = []
     @Published var genres:[genre] = []
     private var api = Api()

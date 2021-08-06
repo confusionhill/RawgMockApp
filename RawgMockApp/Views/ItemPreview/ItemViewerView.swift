@@ -132,15 +132,16 @@ struct ScrollViewContent: View {
                                     .fontWeight(.light)
                             }
                         }.padding(.horizontal)
-                    }
-                        .padding(.bottom)
+                     }
                     }
                     Spacer()
                 }
                 HStack{
-                    ForEach(0..<Int(itemPreviewVM.result.rating ?? 1)){_ in
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
+                    if itemPreviewVM.result.rating != -1 {
+                        ForEach(0..<Int(itemPreviewVM.result.rating ?? 1)){_ in
+                            Image(systemName: "star.fill")
+                                .foregroundColor(.yellow)
+                        }
                     }
                 }.padding(.horizontal)
                 
@@ -156,7 +157,9 @@ struct ScrollViewContent: View {
                                 .background(Color.black)
                                 .cornerRadius(99)
                         }
-                    }.padding(.horizontal)
+                    }
+                    .padding(.top)
+                    .padding(.horizontal)
                 }
                 Text("Description")
                     .font(.title3)
