@@ -12,5 +12,5 @@ struct Api {
 }
 
 struct ApiKey {
-    let key = "93f06e41c9e14a73827ae756b20773ab"
+    let key = ""
 }
