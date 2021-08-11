@@ -21,8 +21,6 @@
 		FF44F57526BBA051005B07B4 /* ItemPreviewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44F57426BBA051005B07B4 /* ItemPreviewVM.swift */; };
 		FF53C64226BC067500BD6FFC /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C64126BC067500BD6FFC /* SearchView.swift */; };
 		FF53C64526BC12FF00BD6FFC /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C64426BC12FF00BD6FFC /* HomeVM.swift */; };
-		FF53C64926BC18F600BD6FFC /* TabViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C64826BC18F600BD6FFC /* TabViewEnum.swift */; };
-		FF53C64B26BC1B2000BD6FFC /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C64A26BC1B2000BD6FFC /* TabViewController.swift */; };
 		FF53C64F26BC35EA00BD6FFC /* States.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C64E26BC35EA00BD6FFC /* States.swift */; };
 		FF53C65226BC368F00BD6FFC /* SearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C65126BC368F00BD6FFC /* SearchVM.swift */; };
 		FF53C65426BC36D600BD6FFC /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C65326BC36D600BD6FFC /* SearchListView.swift */; };
@@ -30,6 +28,11 @@
 		FF53C65826BCEAF700BD6FFC /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C65726BCEAF700BD6FFC /* AccountView.swift */; };
 		FF53C65B26BD0C2000BD6FFC /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C65A26BD0C2000BD6FFC /* SearchModel.swift */; };
 		FF53C65E26BD1C9200BD6FFC /* ItemPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53C65D26BD1C9200BD6FFC /* ItemPreviewModel.swift */; };
+		FF684AB126C3F308005816CE /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF684AB026C3F308005816CE /* SearchBar.swift */; };
+		FF766AB026C2D84F00C8AED5 /* TopContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF766AAF26C2D84F00C8AED5 /* TopContent.swift */; };
+		FF766AB226C2D86D00C8AED5 /* TierList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF766AB126C2D86D00C8AED5 /* TierList.swift */; };
+		FF766AB426C2D8BD00C8AED5 /* ScrollViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF766AB326C2D8BD00C8AED5 /* ScrollViewContent.swift */; };
+		FF766AB626C2D93900C8AED5 /* ItemPreviewNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF766AB526C2D93900C8AED5 /* ItemPreviewNavbar.swift */; };
 		FF79234E26BD8B4E00A05AD4 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79234D26BD8B4E00A05AD4 /* HomeModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,8 +53,6 @@
 		FF44F57426BBA051005B07B4 /* ItemPreviewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPreviewVM.swift; sourceTree = "<group>"; };
 		FF53C64126BC067500BD6FFC /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		FF53C64426BC12FF00BD6FFC /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
-		FF53C64826BC18F600BD6FFC /* TabViewEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewEnum.swift; sourceTree = "<group>"; };
-		FF53C64A26BC1B2000BD6FFC /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		FF53C64E26BC35EA00BD6FFC /* States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = States.swift; sourceTree = "<group>"; };
 		FF53C65126BC368F00BD6FFC /* SearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVM.swift; sourceTree = "<group>"; };
 		FF53C65326BC36D600BD6FFC /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
@@ -59,6 +60,11 @@
 		FF53C65726BCEAF700BD6FFC /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		FF53C65A26BD0C2000BD6FFC /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		FF53C65D26BD1C9200BD6FFC /* ItemPreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPreviewModel.swift; sourceTree = "<group>"; };
+		FF684AB026C3F308005816CE /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		FF766AAF26C2D84F00C8AED5 /* TopContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContent.swift; sourceTree = "<group>"; };
+		FF766AB126C2D86D00C8AED5 /* TierList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierList.swift; sourceTree = "<group>"; };
+		FF766AB326C2D8BD00C8AED5 /* ScrollViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewContent.swift; sourceTree = "<group>"; };
+		FF766AB526C2D93900C8AED5 /* ItemPreviewNavbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPreviewNavbar.swift; sourceTree = "<group>"; };
 		FF79234D26BD8B4E00A05AD4 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				FF44F56A26BAEF35005B07B4 /* HomeView.swift */,
+				FF766AB126C2D86D00C8AED5 /* TierList.swift */,
+				FF766AAF26C2D84F00C8AED5 /* TopContent.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -158,6 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				FF44F57126BAFD43005B07B4 /* ItemViewerView.swift */,
+				FF766AB526C2D93900C8AED5 /* ItemPreviewNavbar.swift */,
+				FF766AB326C2D8BD00C8AED5 /* ScrollViewContent.swift */,
 			);
 			path = ItemPreview;
 			sourceTree = "<group>";
@@ -205,6 +215,7 @@
 				FF44F56D26BAEFD2005B07B4 /* Extentions.swift */,
 				FF44F56F26BAF041005B07B4 /* RemoteImage.swift */,
 				FF53C64E26BC35EA00BD6FFC /* States.swift */,
+				FF684AB026C3F308005816CE /* SearchBar.swift */,
 			);
 			path = ReusablesComponent;
 			sourceTree = "<group>";
@@ -236,8 +247,6 @@
 		FF53C64726BC18E100BD6FFC /* TabViewController */ = {
 			isa = PBXGroup;
 			children = (
-				FF53C64826BC18F600BD6FFC /* TabViewEnum.swift */,
-				FF53C64A26BC1B2000BD6FFC /* TabViewController.swift */,
 			);
 			path = TabViewController;
 			sourceTree = "<group>";
@@ -355,11 +364,12 @@
 				FF53C64226BC067500BD6FFC /* SearchView.swift in Sources */,
 				FF53C64526BC12FF00BD6FFC /* HomeVM.swift in Sources */,
 				FF44F55226BAEE7E005B07B4 /* RawgMockApp.xcdatamodeld in Sources */,
-				FF53C64926BC18F600BD6FFC /* TabViewEnum.swift in Sources */,
 				FF53C65626BC384900BD6FFC /* Api.swift in Sources */,
+				FF684AB126C3F308005816CE /* SearchBar.swift in Sources */,
 				FF53C65826BCEAF700BD6FFC /* AccountView.swift in Sources */,
-				FF53C64B26BC1B2000BD6FFC /* TabViewController.swift in Sources */,
 				FF53C65226BC368F00BD6FFC /* SearchVM.swift in Sources */,
+				FF766AB226C2D86D00C8AED5 /* TierList.swift in Sources */,
+				FF766AB626C2D93900C8AED5 /* ItemPreviewNavbar.swift in Sources */,
 				FF44F54B26BAEE7E005B07B4 /* AppDelegate.swift in Sources */,
 				FF44F57026BAF041005B07B4 /* RemoteImage.swift in Sources */,
 				FF44F57226BAFD43005B07B4 /* ItemViewerView.swift in Sources */,
@@ -369,7 +379,9 @@
 				FF44F54D26BAEE7E005B07B4 /* SceneDelegate.swift in Sources */,
 				FF53C65B26BD0C2000BD6FFC /* SearchModel.swift in Sources */,
 				FF79234E26BD8B4E00A05AD4 /* HomeModel.swift in Sources */,
+				FF766AB426C2D8BD00C8AED5 /* ScrollViewContent.swift in Sources */,
 				FF44F56B26BAEF35005B07B4 /* HomeView.swift in Sources */,
+				FF766AB026C2D84F00C8AED5 /* TopContent.swift in Sources */,
 				FF44F54F26BAEE7E005B07B4 /* ContentView.swift in Sources */,
 				FF53C65E26BD1C9200BD6FFC /* ItemPreviewModel.swift in Sources */,
 			);

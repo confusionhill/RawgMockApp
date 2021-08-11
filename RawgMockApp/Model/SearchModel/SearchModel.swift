@@ -14,7 +14,7 @@ struct search:Codable {
 
 struct result:Codable,Identifiable {
     var id = UUID()
-    var slug:String
+    var slug:String?
     var name:String?
     var released:String?
     var image:String?

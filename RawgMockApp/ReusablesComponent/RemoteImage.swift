@@ -44,8 +44,6 @@ struct RemoteImage:View {
                 } else {
                     self.state = .failure
                 }
-                //MARK: YOU NEED TO LOAD THE DATA FIRST BEFORE LOADING THE GOD DAMN SHIT, but god knows how
-                // my codes are pure shit :)
                 DispatchQueue.main.async {
                     self.objectWillChange.send()
                 }

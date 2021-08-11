@@ -19,7 +19,7 @@ struct TopAndNew:Codable,Identifiable {
     var image:String?
     
     enum CodingKeys: String, CodingKey {
-        case slug
+        case slug,id
         case image = "background_image"
     }
 }

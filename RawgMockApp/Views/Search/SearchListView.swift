@@ -8,30 +8,6 @@
 import Foundation
 import SwiftUI
 
-/*
-struct SearchListView:View{
-    
-    @ObservedObject var searchVM:SearchVM
-    
-    var body:some View {
-        switch searchVM.state {
-        case .loading:
-            ProgressView()
-        case .success:
-            NavigationLink(
-                destination: ItemViewerView()
-                    .navigationTitle("Title")
-                    .navigationBarHidden(true),
-                label: {
-                    SearchListItem(name: "", released: "", link: "", rating: 0, rank: 0)
-                })
-        case .failure :
-            Text("Failed")
-        }
-    }
-}
-*/
-
 struct SearchListItem:View {
     
     var name:String

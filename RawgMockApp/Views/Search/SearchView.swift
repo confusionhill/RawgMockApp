@@ -16,43 +16,34 @@ struct SearchView: View {
     @ViewBuilder
     var body: some View {
             ZStack() {
-                List {
+                VStack {
                     //MARK: Search bar
-                    HStack {
-                        TextField("search...",text:$searchVM.searchItem)
-                            .foregroundColor(.black.opacity(0.7))
-                            .padding()
-                            .background(Color.black.opacity(0.1))
-                            .cornerRadius(10)
-                            .animation(.easeInOut)
-                        if searchVM.searchItem != "" {
-                            Button(action: {
-                                searchVM.fetchData()
-                            }) {
-                                Image(systemName: "paperplane.circle.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                    .animation(.easeInOut)
-                            }
+                    SearchBar(text: $searchVM.searchItem, search: searchVM.fetchData)
+                        .animation(.easeInOut)
+                    List {
+                        //MARK: List
+                        if searchVM.state == .failure {
+                            Text("Item not found")
+                        }
+                        ForEach(searchVM.data){val in
+                            NavigationLink(
+                                destination: ItemViewerView(slug: val.slug ?? "nil")
+                                    .navigationTitle("memes")
+                                    .navigationBarHidden(true),
+                                label: {
+                                    SearchListItem(name: val.name ?? "Error", released: val.released ?? "Error", link: val.image ?? "Error", rating: val.rating ?? 0, rank: val.rank ?? 0)
+                                })
+                                .onAppear{
+                                    //MARK: PENGEN INFINITE SCROLLING, cuma ngejer deadline (masih bisa submit kan hehehe)
+                                    searchVM.isAddingContent(idx: 0)
+                                }
+                        }
+                        if searchVM.state == .loading {
+                            ProgressView()
                         }
                     }
-                    //MARK: List
-                    ForEach(searchVM.data){val in
-                        NavigationLink(
-                            destination: ItemViewerView(slug: val.slug)
-                                .navigationTitle("memes")
-                                .navigationBarHidden(true),
-                            label: {
-                                SearchListItem(name: val.name ?? "Error", released: val.released ?? "Error", link: val.image ?? "Error", rating: val.rating ?? 0, rank: val.rank ?? 0)
-                            })
-                            .onAppear{
-                                //MARK: PENGEN INFINITE SCROLLING, cuma ngejer deadline (masih bisa submit kan hehehe)
-                                searchVM.isAddingContent(idx: 0)
-                            }
-                    }
-                    if searchVM.state == .loading {
-                        ProgressView()
+                    .onTapGesture {
+                        hideKeyboard()
                     }
                 }.padding(.top,70)
                 

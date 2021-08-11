@@ -33,11 +33,11 @@ public class ItemPreviewVM:ObservableObject {
             }
             if let data = data {
                 do {
-                    let hasil = try JSONDecoder().decode(ItemPreviewModel.self, from: data)
+                    let theResult = try JSONDecoder().decode(ItemPreviewModel.self, from: data)
                     DispatchQueue.main.async {
-                        self.devs = hasil.developers ?? []
-                        self.genres = hasil.genres ?? []
-                        self.result = hasil
+                        self.devs = theResult.developers ?? []
+                        self.genres = theResult.genres ?? []
+                        self.result = theResult
                         //print(self.result)
                     }
                 } catch {

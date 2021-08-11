@@ -35,20 +35,39 @@ public class SearchVM:ObservableObject {
         DispatchQueue.main.async {
             self.state = .loading
         }
-        let request = URLRequest(url: setLink().url!)
+        guard let myURL = setLink().url else {
+            DispatchQueue.main.async {
+                self.state = .failure
+                self.data = []
+            }
+            return
+        }
+        //jalan
+        let request = URLRequest(url: myURL)
+        //jalan
         let task = URLSession.shared.dataTask(with: request) { (data,response,error) in
             guard let response = response as? HTTPURLResponse else {
-                self.state = .failure
+                //ga masuk sini
+                DispatchQueue.main.async {
+                    self.data = []
+                    self.state = .failure
+                }
                 return
             }
             //MARK: Fetching the API
             if let error = error {
+                //ga masuk sini
                 print("error! : \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.data = []
+                    self.state = .failure
+                }
                 return
             }
             guard response.statusCode == 200 else {
-                print("Http Status: \(response.statusCode) link: \(self.setLink().url!)")
+                print("Http Status: \(response.statusCode) link: \(myURL)")
                 DispatchQueue.main.async {
+                    self.data = []
                     self.state = .failure
                 }
                 return
@@ -75,8 +94,10 @@ extension SearchVM {
             self.state = .loading
         }
         let request = URLRequest(url: setLink().url!)
+        print("loading data....")
         let task = URLSession.shared.dataTask(with: request) { (data,response,error) in
             guard let response = response as? HTTPURLResponse else { return }
+            print("loading data....")
             //MARK: Fetching the API
             if let error = error {
                 print("error! : \(error.localizedDescription)")
@@ -99,18 +120,21 @@ extension SearchVM {
     private func assignData(data:Data?,error:Error?,type:selection){
         if let data = data {
             do {
-                let hasil = try JSONDecoder().decode(search.self, from: data)
+                let theResult = try JSONDecoder().decode(search.self, from: data)
                 DispatchQueue.main.async {
-                    if type == .new {
-                        self.data = hasil.results
-                    } else {
-                        self.data.append(contentsOf: hasil.results)
-                    }
+                        self.data = theResult.results
+                        print("data :  \(self.data)")
                     self.state = .success
                 }
             } catch {
-                print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.data = []
+                    self.state = .failure
+                }
+                print("error! : \(error.localizedDescription)")
             }
         }
     }
 }
+
+
